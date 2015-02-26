@@ -19,6 +19,9 @@ private:
 		Node* getNext(void) {
 			return m_Next;
 		}
+		Node* getPrev(void) {
+			return m_Prev;
+		}
 		int getData(void) {
 			return m_data;
 		}
@@ -26,16 +29,20 @@ private:
 		void setNext(Node* node) {
 			m_Next = node;
 		}
+		void setPrev(Node* node) {
+			m_Prev = node;
+		}
 		void setData(int data) {
 			m_data = data;
 		}
 	};
 
 	Node* m_Head;
+	Node* m_Tail;
 	int m_count;
 
 public:
-	List(void):m_Head(0), m_count(0) {}
+	List(void):m_Head(0), m_Tail(0), m_count(0) {}
 
 	//print list
 	void print(void) {
@@ -47,6 +54,18 @@ public:
 		while (navigator != 0) {
 			cout << navigator->getData() << " ";
 			navigator = navigator->getNext();
+		}
+	}
+	//print list in reverse
+	void printReverse(void) {
+		if (m_count == 0) {
+			cout << "<empty>";
+			return;
+		}
+		Node* navigator = m_Tail;
+		while (navigator != 0) {
+			cout << navigator->getData() << " ";
+			navigator = navigator->getPrev();
 		}
 	}
 
@@ -61,19 +80,44 @@ public:
 	//add at start of list
 	void push(int data) {
 		Node* node = new Node(data);
-		Node* temp = m_Head;
-		m_Head = node;
-		m_Head->setNext(temp);
+		if (m_count == 0) {
+			m_Head = node;
+		}
+		else if (m_count == 1) {
+			m_Tail = m_Head;
+			m_Head = node;
+			m_Head->setNext(m_Tail);
+			m_Tail->setPrev(m_Head);
+		}
+		else {
+			Node* temp = m_Head;
+			m_Head = node;
+			m_Head->setNext(temp);
+			temp->setPrev(m_Head);
+		}
 		m_count++;
 	}
-
+	//add at end of list
 	void insert(int i) {
-		void;
+		Node* node = new Node(i);
+		Node* temp = m_Tail;
+		m_Tail = node;
+		temp->setNext(m_Tail);
 	}
 
 	//get count
 	int getCount(void) {
 		return m_count;
+	}
+	//delete all content of list
+	void clearList(void) {
+		Node* navigator = m_Head;
+		while (navigator != 0) {
+			Node* temp = navigator->getNext();
+			delete navigator;
+			navigator = temp;
+			m_count--;
+		}
 	}
 
 };
