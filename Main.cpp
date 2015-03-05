@@ -15,7 +15,7 @@ enum MENU {
 	POP,
 	REMOVE_FROM_INDEX,
 	CLEAR_LIST,
-	PRINT,
+	PRINT_NORMAL,
 	PRINT_REVERSE,
 	GENERATE_LIST
 };
@@ -30,20 +30,29 @@ int main() {
 	List Doubly;
 
 	while (running) {
-		cout << "List is: ";
-		if (reversed) {
-			Doubly.print();
-		}
-		else {
-			Doubly.printReverse();
-		}
-		cout << endl;
+		cout << "MENU: " << endl;
+		/*
+		 * Menu
+		*/
 		cout << "0- Quit\n1- Insert at beginning\n2- Insert at end\n3- Insert at index\n";
 		cout << "4- Remove from beggining\n5- Remove from end\n6- Remove from index\n";
-		cout << "7- Clear List\n8- Print list\n9- Print list in reverse\n10- Generate list" << endl;
+		cout << "7- Clear List\n8- Print list as entered\n9- Print list in reverse\n10- Generate list" << endl;
+
+		cout << endl;
+		cout << "List is: ";
+		if (reversed) {
+			Doubly.printReverse();
+		}
+		else {
+			Doubly.print();
+		}
+		if (reversed) {
+			cout << " in reverse";
+		}
+		cout << endl << endl;
+
 		cout << "Enter option: ";
 		uInput = inputToInt();
-
 		switch (uInput) {
 		case QUIT:
 			running = false;
@@ -52,14 +61,20 @@ int main() {
 			cout << "Enter number: ";
 			Doubly.push(inputToInt());
 			break;
+		case POP:
+			Doubly.pop();
+			break;
 		case INSERT:
 			cout << "Enter number: ";
 			Doubly.insert(inputToInt());
 			break;
+		case DELETE:
+			Doubly.del();
+			break;
 		case CLEAR_LIST:
 			Doubly.clearList();
 			break;
-		case PRINT:
+		case PRINT_NORMAL:
 			reversed = false;
 			break;
 		case PRINT_REVERSE:

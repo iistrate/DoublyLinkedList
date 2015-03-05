@@ -5,6 +5,7 @@
 using std::cout;
 using std::endl;
 
+//list containing nodes
 class List {
 private:
 	class Node {
@@ -50,11 +51,13 @@ public:
 			cout << "<empty>";
 			return;
 		}
+		cout << "H ";
 		Node* navigator = m_Head;
 		while (navigator != 0) {
 			cout << navigator->getData() << " ";
 			navigator = navigator->getNext();
 		}
+		cout << "E";
 	}
 	//print list in reverse
 	void printReverse(void) {
@@ -62,15 +65,24 @@ public:
 			cout << "<empty>";
 			return;
 		}
+		cout << "H ";
 		Node* navigator = m_Tail;
 		while (navigator != 0) {
 			cout << navigator->getData() << " ";
 			navigator = navigator->getPrev();
 		}
+		cout << "E";
 	}
 
-	//remove from head and return data
+	//remove from end and return data
 	int pop(void) {
+		Node* temp = m_Tail;
+		delete m_Tail;
+		m_count--;
+		return temp->getData();
+	}
+	//remove from head and return data
+	int del(void) {
 		Node* temp = m_Head;
 		m_Head = m_Head->getNext();
 		m_count--;
@@ -82,6 +94,7 @@ public:
 		Node* node = new Node(data);
 		if (m_count == 0) {
 			m_Head = node;
+			m_Tail = m_Head;
 		}
 		else if (m_count == 1) {
 			m_Tail = m_Head;
@@ -100,9 +113,22 @@ public:
 	//add at end of list
 	void insert(int i) {
 		Node* node = new Node(i);
-		Node* temp = m_Tail;
-		m_Tail = node;
-		temp->setNext(m_Tail);
+		if (m_count == 0) {
+			m_Head = node;
+			m_Tail = m_Head;
+		}
+		else if (m_count == 1) {
+			m_Tail = node;
+			m_Head->setNext(m_Tail);
+			m_Tail->setPrev(m_Head);
+		}
+		else {
+			Node* temp = m_Tail;
+			m_Tail = node;
+			temp->setNext(m_Tail);
+			m_Tail->setPrev(temp);
+		}
+		m_count++;
 	}
 
 	//get count
