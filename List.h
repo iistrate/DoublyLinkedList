@@ -2,6 +2,9 @@
 #define LIST_H
 
 #include <iostream>
+#include <chrono>
+#include <thread>
+
 using std::cout;
 using std::endl;
 
@@ -129,6 +132,36 @@ public:
 			m_Tail->setPrev(temp);
 		}
 		m_count++;
+	}
+	//insert data at index
+	void insertAtIndex(int d, int i) {
+		if (i > m_count || i < 0) {
+			cout << "Index value not right" << endl;
+			return;
+		}
+		//if index given is 0 or 1 re use methods
+		if (i == 0 || i == 1) {
+			insert(d);
+			return;
+		}
+		Node* newNode = new Node(d);
+		Node* navigator = m_Head;
+		int counter = 0;
+		while (navigator != 0) {
+			if (counter == i) {
+				Node* temp = navigator;
+				Node* prev = navigator->getPrev();
+				prev->setNext(newNode);
+				newNode->setPrev(prev);
+				navigator = newNode;
+				newNode->setNext(temp);
+				temp->setPrev(newNode);
+			}
+			navigator = navigator->getNext();
+			counter++;
+		}
+		m_count++;
+		system("pause");
 	}
 
 	//get count

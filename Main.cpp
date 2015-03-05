@@ -20,7 +20,7 @@ enum MENU {
 	GENERATE_LIST
 };
 
-int inputToInt(void);
+int inputToInt(string message);
 
 int main() {
 	bool running = true;
@@ -51,25 +51,25 @@ int main() {
 		}
 		cout << endl << endl;
 
-		cout << "Enter option: ";
-		uInput = inputToInt();
+		uInput = inputToInt("Enter option: ");
 		switch (uInput) {
 		case QUIT:
 			running = false;
 			break;
 		case PUSH:
-			cout << "Enter number: ";
-			Doubly.push(inputToInt());
+			Doubly.push(inputToInt("Enter number: "));
 			break;
 		case POP:
 			Doubly.pop();
 			break;
 		case INSERT:
-			cout << "Enter number: ";
-			Doubly.insert(inputToInt());
+			Doubly.insert(inputToInt("Enter number: "));
 			break;
 		case DELETE:
 			Doubly.del();
+			break;
+		case INSERT_AT_INDEX:
+			Doubly.insertAtIndex(inputToInt("Enter data: "), inputToInt("Enter index: "));
 			break;
 		case CLEAR_LIST:
 			Doubly.clearList();
@@ -88,7 +88,8 @@ int main() {
 	return 0;
 }
 //get input from user and turn it into an integer
-int inputToInt(void) {
+int inputToInt(string message) {
+	cout << message;
 	string s;
 	cin >> s;
 	return atoi(s.c_str());
