@@ -26,6 +26,7 @@ int main() {
 	int uInput;
 	bool reversed = false;
 	int removed = -1;
+	string error;
 
 	List Doubly;
 
@@ -53,7 +54,7 @@ int main() {
 		if (removed != -1) {
 			cout << "Last item removed " << removed << endl;
 		}
-		cout << "Last Error: " << Doubly.getConsoleMessage() << endl;
+		cout << "Last Error: " << error << endl;
 		cout << endl;
 		uInput = inputToInt("Enter option: ");
 		switch (uInput) {
@@ -64,19 +65,39 @@ int main() {
 			Doubly.push(inputToInt("Enter number: "));
 			break;
 		case POP:
-			removed = Doubly.pop();
+			try {
+				removed = Doubly.pop();
+			}
+			catch (const char* err) {
+				error = err;
+			}
 			break;
 		case INSERT:
 			Doubly.insert(inputToInt("Enter number: "));
 			break;
 		case DELETE:
-			removed = Doubly.del();
+			try {
+				removed = Doubly.del();
+			}
+			catch (const char* err) {
+				error = err;
+			}
 			break;
 		case INSERT_AT_INDEX:
-			Doubly.insertAtIndex(inputToInt("Enter data: "), inputToInt("Enter index: "));
+			try {
+				Doubly.insertAtIndex(inputToInt("Enter data: "), inputToInt("Enter index: "));
+			}
+			catch (const char* err) {
+				error = err;
+			}
 			break;
 		case REMOVE_FROM_INDEX:
-			removed = Doubly.removeFromIndex(inputToInt("Enter index: "));
+			try {
+				removed = Doubly.removeFromIndex(inputToInt("Enter index: "));
+			}
+			catch (const char* err) {
+				error = err;
+			}
 			break;
 		case CLEAR_LIST:
 			Doubly.clearList();
@@ -88,7 +109,12 @@ int main() {
 			reversed = true;
 			break;
 		case GENERATE_LIST:
-			Doubly.generateList(inputToInt("Enter list size: "), inputToInt("Enter min: "), inputToInt("Enter max: "));
+			try {
+				Doubly.generateList(inputToInt("Enter list size: "), inputToInt("Enter min: "), inputToInt("Enter max: "));
+			}
+			catch (const char* err) {
+				error = err;
+			}
 			break;
 		}
 		system("cls");

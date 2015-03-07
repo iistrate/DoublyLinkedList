@@ -80,6 +80,9 @@ public:
 
 	//remove from end and return data
 	int pop(void) {
+		if (getCount() == 0) {
+			throw "Can't delete what does not exist.";
+		}
 		Node* temp = m_Tail;
 		delete m_Tail;
 		m_count--;
@@ -87,6 +90,9 @@ public:
 	}
 	//remove from head and return data
 	int del(void) {
+		if (getCount() == 0) {
+			throw "Can't delete what does not exist.";
+		}
 		Node* temp = m_Head;
 		m_Head = m_Head->getNext();
 		m_count--;
@@ -94,6 +100,9 @@ public:
 	}
 	//remove from index and return data
 	int removeFromIndex(int index) {
+		if (index > getCount()) {
+			throw "Index does not exist.";
+		}
 		Node* navigator = m_Head;
 		int counter = 0;
 		while (navigator != 0) {
@@ -152,6 +161,9 @@ public:
 	}
 	//insert data at index
 	void insertAtIndex(int d, int i) {
+		if (i > getCount()) {
+			throw "Index does not exist.";
+		}
 		if (i > m_count || i < 0) {
 			cout << "Index value not right" << endl;
 			return;
@@ -197,7 +209,7 @@ public:
 	//generate list
 	void generateList(int size, int min = 0, int max = 9999) {
 		if (min > max) {
-			m_consoleMessage = "Min can't be bigger than max";
+			throw "Min can't be bigger than max";
 			return;
 		}
 		//setup dice roll
