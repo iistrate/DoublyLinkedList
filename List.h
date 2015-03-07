@@ -90,6 +90,22 @@ public:
 		m_count--;
 		return temp->getData();
 	}
+	//remove from index and return data
+	int removeFromIndex(int index) {
+		Node* navigator = m_Head;
+		int counter = 0;
+		while (navigator != 0) {
+			if (counter == index) {
+				Node* temp = navigator;
+				temp->getPrev()->setNext(temp->getNext());
+				temp->getNext()->setPrev(temp->getPrev());
+				m_count--;
+				return temp->getData();
+			}
+			navigator = navigator->getNext();
+			counter++;
+		}
+	}
 
 	//add at start of list
 	void push(int data) {
@@ -160,7 +176,6 @@ public:
 			counter++;
 		}
 		m_count++;
-		system("pause");
 	}
 
 	//get count

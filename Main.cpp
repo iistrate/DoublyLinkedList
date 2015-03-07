@@ -26,6 +26,7 @@ int main() {
 	bool running = true;
 	int uInput;
 	bool reversed = false;
+	int removed = -1;
 
 	List Doubly;
 
@@ -39,7 +40,7 @@ int main() {
 		cout << "7- Clear List\n8- Print list as entered\n9- Print list in reverse\n10- Generate list" << endl;
 
 		cout << endl;
-		cout << "List is: ";
+		cout << "List of size(" << Doubly.getCount() << ") is: ";
 		if (reversed) {
 			Doubly.printReverse();
 		}
@@ -49,8 +50,10 @@ int main() {
 		if (reversed) {
 			cout << " in reverse";
 		}
-		cout << endl << endl;
-
+		cout << endl;
+		if (removed != -1) {
+			cout << "Last item removed " << removed << endl;
+		}
 		uInput = inputToInt("Enter option: ");
 		switch (uInput) {
 		case QUIT:
@@ -60,16 +63,19 @@ int main() {
 			Doubly.push(inputToInt("Enter number: "));
 			break;
 		case POP:
-			Doubly.pop();
+			removed = Doubly.pop();
 			break;
 		case INSERT:
 			Doubly.insert(inputToInt("Enter number: "));
 			break;
 		case DELETE:
-			Doubly.del();
+			removed = Doubly.del();
 			break;
 		case INSERT_AT_INDEX:
 			Doubly.insertAtIndex(inputToInt("Enter data: "), inputToInt("Enter index: "));
+			break;
+		case REMOVE_FROM_INDEX:
+			removed = Doubly.removeFromIndex(inputToInt("Enter index: "));
 			break;
 		case CLEAR_LIST:
 			Doubly.clearList();
