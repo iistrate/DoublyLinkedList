@@ -2,8 +2,7 @@
 #define LIST_H
 
 #include <iostream>
-#include <chrono>
-#include <thread>
+#include <random>
 
 using std::cout;
 using std::endl;
@@ -178,7 +177,18 @@ public:
 			m_count--;
 		}
 	}
-
+	//generate list
+	void generateList(int size, int min = 0, int max = 9999) {
+		//setup dice roll
+		std::default_random_engine generator;
+		std::uniform_int_distribution<int> distribution(min, max);
+		//clear current list
+		clearList();
+		for (int i = 0; i < size; i++) {
+			//roll dice
+			insert(distribution(generator));
+		}
+	}
 };
 
 #endif //list.h

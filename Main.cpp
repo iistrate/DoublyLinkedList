@@ -81,6 +81,7 @@ int main() {
 			reversed = true;
 			break;
 		case GENERATE_LIST:
+			Doubly.generateList(inputToInt("Enter list size: "), inputToInt("Enter min: "), inputToInt("Enter max: "));
 			break;
 		}
 		system("cls");
