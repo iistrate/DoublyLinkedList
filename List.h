@@ -3,9 +3,11 @@
 
 #include <iostream>
 #include <random>
+#include <string>
 
 using std::cout;
 using std::endl;
+using std::string;
 
 //list containing nodes
 class List {
@@ -43,7 +45,7 @@ private:
 	Node* m_Head;
 	Node* m_Tail;
 	int m_count;
-
+	string m_consoleMessage;
 public:
 	List(void):m_Head(0), m_Tail(0), m_count(0) {}
 
@@ -194,6 +196,10 @@ public:
 	}
 	//generate list
 	void generateList(int size, int min = 0, int max = 9999) {
+		if (min > max) {
+			m_consoleMessage = "Min can't be bigger than max";
+			return;
+		}
 		//setup dice roll
 		std::default_random_engine generator;
 		std::uniform_int_distribution<int> distribution(min, max);
@@ -203,6 +209,9 @@ public:
 			//roll dice
 			insert(distribution(generator));
 		}
+	}
+	string getConsoleMessage(void) {
+		return m_consoleMessage;
 	}
 };
 

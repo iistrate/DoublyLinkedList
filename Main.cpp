@@ -2,7 +2,6 @@
 #include <string>
 #include "List.h"
 
-
 using std::cin;
 using std::string;
 
@@ -54,6 +53,8 @@ int main() {
 		if (removed != -1) {
 			cout << "Last item removed " << removed << endl;
 		}
+		cout << "Last Error: " << Doubly.getConsoleMessage() << endl;
+		cout << endl;
 		uInput = inputToInt("Enter option: ");
 		switch (uInput) {
 		case QUIT:
