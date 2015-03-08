@@ -160,24 +160,29 @@ public:
 		m_count++;
 	}
 	//insert data at index
-	void insertAtIndex(int d, int i) {
-		if (i > getCount()) {
+	void insertAtIndex(int data, int index) {
+		if (index > getCount()) {
 			throw "Index does not exist.";
 		}
-		if (i > m_count || i < 0) {
+		if (index > m_count || index < 0) {
 			cout << "Index value not right" << endl;
 			return;
 		}
-		//if index given is 0 or 1 re use methods
-		if (i == 0 || i == 1) {
-			insert(d);
+		//if index is 0 or last reuse functions
+		if (index == 0) {
+			push(data);
 			return;
 		}
-		Node* newNode = new Node(d);
+		else if (index == m_count) {
+			insert(data);
+			return;
+		}
+		
+		Node* newNode = new Node(data);
 		Node* navigator = m_Head;
 		int counter = 0;
 		while (navigator != 0) {
-			if (counter == i) {
+			if (counter == index) {
 				Node* temp = navigator;
 				Node* prev = navigator->getPrev();
 				prev->setNext(newNode);
