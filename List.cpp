@@ -1,32 +1,19 @@
 #include "List.h"
 
-void List::print(void) {
+void List::print(bool reversed) {
 	if (m_count == 0) {
 		cout << "<empty>";
 		return;
 	}
 	cout << "H ";
-	Node* navigator = m_Head;
+	Node* navigator = reversed == false ? m_Head : m_Tail;
 	while (navigator != 0) {
 		cout << navigator->getData() << " ";
-		navigator = navigator->getNext();
+		navigator = reversed == false ? navigator->getNext() : navigator->getPrev();
 	}
 	cout << "E";
 }
 
-void List::printReverse(void) {
-	if (m_count == 0) {
-		cout << "<empty>";
-		return;
-	}
-	cout << "H ";
-	Node* navigator = m_Tail;
-	while (navigator != 0) {
-		cout << navigator->getData() << " ";
-		navigator = navigator->getPrev();
-	}
-	cout << "E";
-}
 int List::removeFromIndex(int index) {
 	if (index > getCount()) {
 		throw "Index does not exist.";

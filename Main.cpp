@@ -41,12 +41,7 @@ int main() {
 
 		cout << endl;
 		cout << "List of size(" << Doubly.getCount() << ") is: ";
-		if (reversed) {
-			Doubly.printReverse();
-		}
-		else {
-			Doubly.print();
-		}
+		Doubly.print(reversed);
 		if (reversed) {
 			cout << " in reverse";
 		}

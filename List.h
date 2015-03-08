@@ -48,10 +48,8 @@ private:
 public:
 	List(void):m_Head(0), m_Tail(0), m_count(0) {}
 
-	//print list
-	void print(void);
-	//print list in reverse
-	void printReverse(void);
+	//print list regular or reversed
+	void print(bool reversed);
 
 	//get count
 	int getCount(void) {
