@@ -16,7 +16,9 @@ enum MENU {
 	CLEAR_LIST,
 	PRINT_NORMAL,
 	PRINT_REVERSE,
-	GENERATE_LIST
+	GENERATE_LIST,
+	FIND_VALUE,
+	GET_FROM_INDEX
 };
 
 int inputToInt(string message);
@@ -26,6 +28,7 @@ int main() {
 	int uInput;
 	bool reversed = false;
 	int removed = -1;
+	int console = -1;
 	string error;
 
 	List Doubly;
@@ -37,7 +40,8 @@ int main() {
 		*/
 		cout << "0- Quit\n1- Insert at beginning\n2- Insert at end\n3- Insert at index\n";
 		cout << "4- Remove from beggining\n5- Remove from end\n6- Remove from index\n";
-		cout << "7- Clear List\n8- Print list as entered\n9- Print list in reverse\n10- Generate list" << endl;
+		cout << "7- Clear List\n8- Print list as entered\n9- Print list in reverse\n10- Generate list\n";
+		cout << "11- Find Value\n12- Get Value at Index" << endl;
 
 		cout << endl;
 		cout << "List of size(" << Doubly.getCount() << ") is: ";
@@ -50,6 +54,9 @@ int main() {
 			cout << "Last item removed " << removed << endl;
 		}
 		cout << "Last Error: " << error << endl;
+		if (console != -1) {
+			cout << "Console message: " << console << endl;
+		}
 		cout << endl;
 		uInput = inputToInt("Enter option: ");
 		switch (uInput) {
@@ -106,6 +113,22 @@ int main() {
 		case GENERATE_LIST:
 			try {
 				Doubly.generateList(inputToInt("Enter list size: "), inputToInt("Enter min: "), inputToInt("Enter max: "));
+			}
+			catch (const char* err) {
+				error = err;
+			}
+			break;
+		case GET_FROM_INDEX:
+			try {
+				console = Doubly.getFromIndex(inputToInt("Enter index: "));
+			}
+			catch (const char* err) {
+				error = err;
+			}
+			break;
+		case FIND_VALUE:
+			try {
+				console = Doubly.findValue(inputToInt("Enter value: "));
 			}
 			catch (const char* err) {
 				error = err;

@@ -33,6 +33,33 @@ int List::removeFromIndex(int index) {
 	}
 }
 
+int List::getFromIndex(int index) {
+	if (index > getCount()) {
+		throw "Index does not exist.";
+	}
+	Node* navigator = m_Head;
+	int counter = 0;
+	while (navigator != 0) {
+		if (counter == index) {
+			return navigator->getData();
+		}
+		navigator = navigator->getNext();
+		counter++;
+	}
+}
+int List::findValue(int data) {
+	Node* navigator = m_Head;
+	int counter = 0;
+	while (navigator != 0) {
+		int d = navigator->getData();
+		if (d == data) {
+			return counter;
+		}
+		navigator = navigator->getNext();
+		counter++;
+	}
+}
+
 void List::push(int data) {
 	Node* node = new Node(data);
 	if (m_count == 0) {

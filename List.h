@@ -86,6 +86,11 @@ public:
 	//insert data at index
 	void insertAtIndex(int data, int index);
 
+	//get object from index
+	int getFromIndex(int index);
+	//find by value and return index
+	int findValue(int data);
+
 	//delete all content of list
 	void clearList(void);
 	//generate list
