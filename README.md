@@ -44,3 +44,6 @@ Class List {
 
 }
 
+[![Analytics](https://ga-beacon.appspot.com/UA-4376077-7/DoublyLinkedList/?pixel)](https://github.com/igrigorik/ga-beacon)
+
+
